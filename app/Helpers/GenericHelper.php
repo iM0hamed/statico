@@ -23,3 +23,12 @@ function checkGuardIsPlayer()
 {
     return Auth::guard('player')->check();
 }
+
+function redirectIfAuthenticated()
+{
+    if (checkGuardIsAdmin()) {
+        return redirect(route('admin.dashboard'));
+    }
+
+    return redirect(route('home'));
+}

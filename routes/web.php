@@ -4,11 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    if (checkGuardIsAdmin()) {
-        return redirect(route('admin.dashboard'));
-    }
-
-    return redirect(route('home'));
+    redirectIfAuthenticated();
 });
 
 Auth::routes();
