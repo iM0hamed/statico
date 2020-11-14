@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AdminLoginController extends Controller
 {
@@ -13,23 +14,36 @@ class AdminLoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
     }
 
-    public function showLoginForm()
+    public function username()
     {
-        return view('auth.admin.login');
+        return 'username';
     }
 
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'username' => 'required|string',
-            'password' => 'required|string'
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
         ]);
 
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
             return redirect()->intended(route('admin.dashboard'));
         }
 
-        return redirect()->back()->withInput();
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    public function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            $this->username() => [trans('auth.failed')],
+        ]);
+    }
+
+    public function showLoginForm()
+    {
+        $title = 'Login';
+        return view('auth.admin.login', compact('title'));
     }
 
     public function logout()

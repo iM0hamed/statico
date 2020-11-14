@@ -16,5 +16,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [\App\Http\Controllers\Auth\AdminLoginController::class, 'showLoginForm'])->name('admin.loginForm');
     Route::post('/login', [\App\Http\Controllers\Auth\AdminLoginController::class, 'login'])->name('admin.login');
     Route::post('/logout', [\App\Http\Controllers\Auth\AdminLoginController::class, 'logout'])->name('admin.logout');
+    
+    Route::get('/teams', [\App\Http\Controllers\TeamController::class, 'index'])->name('teams');
+    Route::get('/teams/create', [\App\Http\Controllers\TeamController::class, 'create'])->name('teams.create');
+    Route::get('/teams/{slug}', [\App\Http\Controllers\TeamController::class, 'show'])->name('teams.detail');
+    
     Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 });

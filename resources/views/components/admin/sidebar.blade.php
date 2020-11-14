@@ -18,10 +18,10 @@
             </li>
             <li class="menu-header">{{ __('Main Menu') }}</li>
             <li
-                class="{{ request()->routeIs('admin.dashboard') == true ? 'active' : 'nav-item' }}">
-                <a class="nav-link" href="{{ route('admin.dashboard') }}" data-toggle="tooltip"
-                    data-placement="right" data-original-title="{{ __('Dashboard') }}">
-                    <i class="fas fa-fire"></i><span>{{ __('Dashboard') }}</span>
+                class="{{ request()->routeIs('teams') == true ? 'active' : 'nav-item' }}">
+                <a class="nav-link" href="{{ route('teams') }}" data-toggle="tooltip"
+                    data-placement="right" data-original-title="{{ __('Teams') }}">
+                    <i class="fas fa-users"></i><span>{{ __('Teams') }}</span>
                 </a>
             </li>
         </ul>

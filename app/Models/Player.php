@@ -32,4 +32,9 @@ class Player extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function teams()
+    {
+        return $this->belongsTo(Team::class);
+    }
 }

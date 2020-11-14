@@ -46,7 +46,8 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.player.login');
+        $title = 'Login';
+        return view('auth.player.login', compact('title'));
     }
 
     public function logout()
