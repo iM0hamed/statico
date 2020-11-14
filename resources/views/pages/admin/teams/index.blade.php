@@ -50,7 +50,7 @@
                                     <div class="card-body text-center">
                                         <h5 class="lead">{{ $team->name }}</h5>
                                         <hr>
-                                        <p class="text-dark">{{ Str::limit($team->description, 10) }}</p>
+                                        <p class="text-dark">{{ $team->description }}</p>
                                     </div>
                                 </div>
                             </a>

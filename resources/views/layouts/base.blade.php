@@ -13,6 +13,7 @@
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- Template CSS -->
     <link rel="stylesheet" href={{ url('assets/css/style.css') }}>
@@ -35,6 +36,7 @@
     <script src={{ url('assets/js/stisla.js') }}></script>
 
     <!-- JS Libraies -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
     <!-- Template JS File -->
     <script src={{ url('assets/js/scripts.js') }}></script>

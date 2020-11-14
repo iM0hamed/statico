@@ -22,7 +22,14 @@ class TeamController extends Controller
 
     public function create(Request $request) 
     {
-        return view('pages.admin.teams.create');
+        $title = 'Create Team';
+
+        return view('pages.admin.teams.create', compact('title'));
+    }
+
+    public function store()
+    {
+
     }
 
     public function show($slug)
