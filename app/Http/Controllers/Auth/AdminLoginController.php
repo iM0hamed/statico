@@ -19,8 +19,6 @@ class AdminLoginController extends Controller
         return 'username';
     }
 
-    // testing git
-
     public function login(Request $request)
     {
         $request->validate([
