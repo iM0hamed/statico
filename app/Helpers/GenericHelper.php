@@ -26,7 +26,7 @@ function checkGuardIsPlayer()
 
 function redirectIfAuthenticated()
 {
-    if (checkGuardIsAdmin()) {
+    if (Auth::guard('admin')->check()) {
         return redirect(route('admin.dashboard'));
     }
 
