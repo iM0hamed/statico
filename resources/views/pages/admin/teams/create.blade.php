@@ -10,7 +10,7 @@
         </div>
 
         <div class="section-body">
-            <div class="container">
+            <div class="container ml-0 mr-0">
                 <div class="row justify-content-between align-items-center">
                     <h2 class="section-title">
                         Create new team
@@ -23,29 +23,44 @@
                         <div class="card-header">
                             <h4>Team registration form</h4>
                         </div>
-                        <form action="" method="post">
+                        <form action="{{ route('teams.store') }}" method="post">
+                            @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Team name</label>
-                                    <input type="text" name="name" id="name" class="form-control">
+                                    <input type="text" name="name" id="name"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        value="{{ old('name') }}">
+                                    @error('name')
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Team description</label>
-                                    <textarea name="description" id="description" class="form-control"></textarea>
+                                    <input name="description" id="description"
+                                        class="form-control @error('description') is-invalid @enderror"
+                                        value="{{ old('description') }}">
+                                    @error('description')
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <!-- <div class="form-group">
-                                    <label for="players">Players</label>
-                                    <select name="players" id="players" class="form-control select2" multiple>
-                                        <option value="Player 1">Player 1</option>
-                                        <option value="Player 2">Player 2</option>
-                                        <option value="Player 3">Player 3</option>
-                                        <option value="Player 4">Player 4</option>
+                                <div class="form-group">
+                                    <label for="players">Roster</label>
+                                    <select name="players[]" id="players" class="form-control rosters" multiple>
+                                        @foreach($players as $player)
+                                            <option value="{{ $player->id }}">
+                                                {{ $player->in_game_nickname }}</option>
+                                        @endforeach
                                     </select>
-                                </div> -->
+                                </div>
                             </div>
                             <div class="card-footer text-right pt-0">
-                                <button class="btn btn-secondary">Cancel</button>
-                                <button class="btn btn-primary">Save</button>
+                                <a href="{{ route('teams') }}" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </form>
                     </div>
@@ -54,4 +69,18 @@
         </div>
     </section>
 </div>
+@endsection
+
+@section('javascript')
+<script>
+    $(document).ready(function () {
+        $(".rosters").select2({
+            maximumSelectionLength: 5,
+            formatSelectionTooBig: function (limit) {
+                return 'Too many selected items';
+            }
+        });
+    });
+
+</script>
 @endsection

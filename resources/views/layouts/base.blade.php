@@ -42,6 +42,8 @@
     <script src={{ url('assets/js/scripts.js') }}></script>
     <script src={{ url('assets/js/custom.js') }}></script>
 
+    @yield('javascript')
+
     <script>
         if (localStorage.getItem('sidebar') == 'toggle')
             toggleSidebar();

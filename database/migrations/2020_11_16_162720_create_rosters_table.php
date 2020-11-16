@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlayersTable extends Migration
+class CreateRostersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreatePlayersTable extends Migration
      */
     public function up()
     {
-        Schema::create('players', function (Blueprint $table) {
+        Schema::create('rosters', function (Blueprint $table) {
             $table->id();
-            $table->string('in_game_id')->unique();
-            $table->string('in_game_nickname')->unique();
-            $table->string('password')->default(bcrypt('123456'));
-            $table->softDeletes();
+            $table->unsignedBigInteger('player_id');
+            $table->unsignedBigInteger('team_id');
+            $table->foreign('player_id')->references('id')->on('players');
+            $table->foreign('team_id')->references('id')->on('teams');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreatePlayersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('players');
+        Schema::dropIfExists('rosters');
     }
 }

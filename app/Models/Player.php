@@ -20,7 +20,6 @@ class Player extends Authenticatable
     protected $fillable = [
         'in_game_id',
         'in_game_nickname',
-        'team_id',
         'password',
     ];
 
@@ -33,8 +32,8 @@ class Player extends Authenticatable
         'password',
     ];
 
-    public function teams()
+    public function team()
     {
-        return $this->belongsTo(Team::class);
+        return $this->hasOne(Team::class);
     }
 }

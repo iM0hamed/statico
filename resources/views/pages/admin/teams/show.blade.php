@@ -14,8 +14,8 @@
                     </h2>
                     <div class="text-center">
                         <a href="{{ route('teams.create') }}" class="btn btn-primary"><i
-                                class="fas fa-cogs fa-lg"></i>
-                            Options
+                                class="fas fa-users fa-lg"></i>
+                            Roster
                         </a>
                     </div>
                 </div>
@@ -27,10 +27,11 @@
                             alt="Team logo">
                         <div class="card-body">
                             <h5 class="lead">{{ $team->name }}</h5>
-                            <hr>
-                            @foreach($team->players as $player)
-                                <p class="text-dark">{{ $player->in_game_nickname }}</p>
-                            @endforeach
+                            <ul class="list-group list-group-flush">
+                                @foreach($team->players as $player)
+                                    <li class="list-group-item">{{ $player->in_game_nickname }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>
