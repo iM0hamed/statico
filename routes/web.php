@@ -25,7 +25,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/teams', [\App\Http\Controllers\TeamController::class, 'store'])->name('teams.store');
     Route::get('/teams/create', [\App\Http\Controllers\TeamController::class, 'create'])->name('teams.create');
     Route::get('/teams/{slug}', [\App\Http\Controllers\TeamController::class, 'show'])->name('teams.detail');
-    Route::get('/teams/{slug}', [\App\Http\Controllers\TeamController::class, 'show'])->name('teams.detail');
+    Route::get('/teams/{slug}/setting', [\App\Http\Controllers\TeamController::class, 'show'])->name('teams.setting');
     
     Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 });
