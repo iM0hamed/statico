@@ -18,6 +18,11 @@
                             </i>
                             Team Setting
                         </a>
+                        <a href="{{ route('teams.setting', $team->slug) }}"
+                            class="btn btn-dark"><i class="fas fa-archive fa-lg">
+                            </i>
+                            Archive Team
+                        </a>
                     </div>
                 </div>
             </div>
@@ -55,7 +60,8 @@
                         <div class="card-header bg-secondary">
                             <h4 class="lead">Rosters</h4>
                             <div class="ml-auto">
-                                <button class="btn btn-primary"><i class="fas fa-random"></i> Change Roster</button>
+                                <a href="{{ route('teams.roster', $team->slug) }}"
+                                    class="btn btn-primary"><i class="fas fa-random"></i> Change Roster</a>
                             </div>
                         </div>
                         <div class="card-body">

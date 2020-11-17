@@ -13,7 +13,7 @@
             <div class="container ml-0 mr-0">
                 <div class="row justify-content-between align-items-center">
                     <h2 class="section-title">
-                        Create new team
+                        {{ $team->name }}
                     </h2>
                 </div>
             </div>
@@ -21,16 +21,18 @@
                 <div class="col-md-10 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Team registration form</h4>
+                            <h4>Team setting</h4>
                         </div>
-                        <form action="{{ route('teams.store') }}" method="post">
+                        <form action="{{ route('teams.setting.update', $team->slug) }}"
+                            method="post">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Team name</label>
                                     <input type="text" name="name" id="name"
                                         class="form-control @error('name') is-invalid @enderror"
-                                        value="{{ old('name') }}">
+                                        value="{{ old('name') ?? $team->name }}">
                                     @error('name')
                                         <span class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
@@ -41,25 +43,17 @@
                                     <label for="description">Team description</label>
                                     <input name="description" id="description"
                                         class="form-control @error('description') is-invalid @enderror"
-                                        value="{{ old('description') }}">
+                                        value="{{ old('description') ?? $team->description }}">
                                     @error('description')
                                         <span class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="players">Roster</label>
-                                    <select name="players[]" id="players" class="form-control rosters" multiple>
-                                        @foreach($players as $player)
-                                            <option value="{{ $player->id }}">
-                                                {{ $player->in_game_nickname }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </div>
                             <div class="card-footer text-right pt-0">
-                                <a href="{{ route('teams') }}" class="btn btn-secondary">Cancel</a>
+                                <a href="{{ route('teams.detail', $team->slug) }}"
+                                    class="btn btn-secondary">Cancel</a>
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </form>
@@ -69,18 +63,4 @@
         </div>
     </section>
 </div>
-@endsection
-
-@section('javascript')
-<script>
-    $(document).ready(function () {
-        $(".rosters").select2({
-            maximumSelectionLength: 6,
-            formatSelectionTooBig: function (limit) {
-                return 'Too many selected items';
-            }
-        });
-    });
-
-</script>
 @endsection

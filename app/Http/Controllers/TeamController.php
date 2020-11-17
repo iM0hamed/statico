@@ -14,6 +14,20 @@ class TeamController extends Controller
         $this->middleware('auth:admin');
     }
 
+    private function teamRules($state = 'store', $value = null)
+    {
+        $name = 'required|regex:/^[\pL\s\-]+$/u|string|unique:teams,name';
+
+        if ($state != 'store') {
+            $name = $name . ',' . $value;
+        }
+
+        return [
+            'name' => $name,
+            'description' => 'required|regex:/^[\pL\s\-]+$/u'
+        ];
+    }
+
     public function index()
     {
         $title = 'Teams';
@@ -26,18 +40,14 @@ class TeamController extends Controller
     {
         $title = 'Create Team';
 
-        $players = Player::all();
+        $players = Player::with('team')->whereDoesntHave('team')->get();
 
         return view('pages.admin.teams.create', compact('title', 'players'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:teams|string|regex:/^[\pL\s\-]+$/u',
-            'description' => 'required|regex:/^[\pL\s\-]+$/u',
-            'players' => 'array'
-        ]);
+        $request->validate($this->teamRules());
 
         $request['slug'] = Str::slug($request->name);
 
@@ -48,6 +58,51 @@ class TeamController extends Controller
         }
 
         return redirect(route('teams'))->with('status', 'Team created successfully.');
+    }
+
+    public function setting($slug)
+    {
+        $team = Team::where('slug', $slug)->first();
+        $title = 'Team Setting';
+
+        return view('pages.admin.teams.setting', compact('team', 'title'));
+    }
+
+    public function updateSetting(Request $request, $slug)
+    {
+        $team = Team::where('slug', $slug)->first();
+        $request->validate($this->teamRules('update', $team->id));
+
+        $team->update($request->all());
+
+        return redirect(route('teams.detail', $slug))->with('status', 'Team updated successfully.');
+    }
+
+    public function roster($slug)
+    {
+        $title = 'Change Roster';
+        $team = Team::with('players')->where('slug', $slug)->first();
+        $teamId = $team->id;
+
+        $players = Player::whereHas('team', function($query) use ($team) {
+            $query->where('team_id', $team->id);
+        })->orDoesntHave('team')->get();
+
+        return view('pages.admin.teams.roster', compact('team', 'title', 'players'));
+    }
+
+    public function updateRoster(Request $request, $slug)
+    {
+        $team = Team::with('players')->where('slug', $slug)->first();
+
+        $request->validate([
+            'players' => 'array'
+        ]);
+
+        $team->players()->sync($request->players);
+
+
+        return redirect(route('teams.detail', $slug))->with('status', 'Roster updated successfully.');
     }
 
     public function show($slug)

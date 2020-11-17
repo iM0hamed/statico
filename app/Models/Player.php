@@ -34,6 +34,6 @@ class Player extends Authenticatable
 
     public function team()
     {
-        return $this->hasOne(Team::class);
+        return $this->belongsToMany(Team::class, 'rosters');
     }
 }
