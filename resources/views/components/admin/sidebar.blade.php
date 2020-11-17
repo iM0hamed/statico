@@ -21,7 +21,14 @@
                 class="{{ request()->routeIs('teams') == true ? 'active' : 'nav-item' }}">
                 <a class="nav-link" href="{{ route('teams') }}" data-toggle="tooltip"
                     data-placement="right" data-original-title="{{ __('Teams') }}">
-                    <i class="fas fa-users"></i><span>{{ __('Teams') }}</span>
+                    <i class="fab fa-ethereum"></i><span>{{ __('Teams') }}</span>
+                </a>
+            </li>
+            <li
+                class="{{ request()->routeIs('players') == true ? 'active' : 'nav-item' }}">
+                <a class="nav-link" href="{{ route('players') }}" data-toggle="tooltip"
+                    data-placement="right" data-original-title="{{ __('Players') }}">
+                    <i class="fas fa-users"></i><span>{{ __('Players') }}</span>
                 </a>
             </li>
         </ul>

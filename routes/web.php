@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,8 @@ Route::prefix('admin')->group(function () {
     Route::put('/teams/{slug}/setting', [\App\Http\Controllers\TeamController::class, 'updateSetting'])->name('teams.setting.update');
     Route::get('/teams/{slug}/rosters-change', [\App\Http\Controllers\TeamController::class, 'roster'])->name('teams.roster');
     Route::put('/teams/{slug}/rosters-change', [\App\Http\Controllers\TeamController::class, 'updateRoster'])->name('teams.roster.update');
+
+    Route::get('players', [\App\Http\Controllers\PlayerController::class, 'index'])->name('players');
 
     
     Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');

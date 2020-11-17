@@ -36,4 +36,9 @@ class Player extends Authenticatable
     {
         return $this->belongsToMany(Team::class, 'rosters');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'players_roles');
+    }
 }
