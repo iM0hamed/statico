@@ -55,8 +55,6 @@
 <script>
     $(document).ready(function() {
         $(".rosters").select2({
-            // includeSelectAllOption: true,
-            // enableFiltering: true
             theme: 'classic'
         });
     });

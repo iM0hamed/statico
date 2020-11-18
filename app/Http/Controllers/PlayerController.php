@@ -2,21 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Player;
-use Illuminate\Http\Request;
+use App\Http\Requests\PlayerStoreRequest;
+use App\Models\Role;
+use App\Repositories\Interfaces\IPlayerRepository;
+use App\Repositories\Interfaces\IRoleRepository;
 
 class PlayerController extends Controller
 {
-    public function __construct()
+    private $playerRepository;
+    private $roleRepository;
+
+    public function __construct(IPlayerRepository $playerRepository, IRoleRepository $roleRepository)
     {
         $this->middleware('auth:admin');
+        $this->playerRepository = $playerRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     public function index()
     {
         $title = 'Players';
-        $players = Player::with('team')->paginate(6);
+        $players = $this->playerRepository->getPaginated(6);
 
         return view('pages.admin.players.index', compact('title', 'players'));
+    }
+
+    public function create()
+    {
+        $title = 'Register Player';
+        $roles = $this->roleRepository->getAll();
+
+        return view('pages.admin.players.create', compact('title', 'roles'));
+    }
+
+    public function store(PlayerStoreRequest $request)
+    {
+        $this->playerRepository->store($request->all());
+
+        return redirect(route('players'))->with('status', 'New player has been registered');
     }
 }

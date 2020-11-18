@@ -18,6 +18,7 @@ class Player extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'slug',
         'in_game_id',
         'in_game_nickname',
         'password',

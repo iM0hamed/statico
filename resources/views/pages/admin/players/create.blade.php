@@ -13,7 +13,7 @@
             <div class="container ml-0 mr-0">
                 <div class="row justify-content-between align-items-center">
                     <h2 class="section-title">
-                        Create new team
+                        Register new player
                     </h2>
                 </div>
             </div>
@@ -21,43 +21,43 @@
                 <div class="col-md-10 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Team registration form</h4>
+                            <h4>Player registration form</h4>
                         </div>
-                        <form action="{{ route('teams.store') }}" method="post">
+                        <form action="{{ route('players.store') }}" method="post">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Team name</label>
-                                    <input type="text" name="name" id="name"
-                                        class="form-control @error('name') is-invalid @enderror"
-                                        value="{{ old('name') }}">
-                                    @error('name')
+                                    <label for="in_game_id">in-Game ID</label>
+                                    <input type="text" name="in_game_id" id="in_game_id"
+                                        class="form-control @error('in_game_id') is-invalid @enderror"
+                                        value="{{ old('in_game_id') }}">
+                                    @error('in_game_id')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Team description</label>
-                                    <input name="description" id="description"
-                                        class="form-control @error('description') is-invalid @enderror"
-                                        value="{{ old('description') }}">
-                                    @error('description')
+                                    <label for="in_game_nickname">in-Game Nickname</label>
+                                    <input name="in_game_nickname" id="in_game_nickname"
+                                        class="form-control @error('in_game_nickname') is-invalid @enderror"
+                                        value="{{ old('in_game_nickname') }}">
+                                    @error('in_game_nickname')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="players">Roster</label>
-                                    <select name="players[]" id="players"
-                                        class="form-control rosters @error('players') is-invalid @enderror" multiple>
-                                        @foreach($players as $player)
-                                        <option value="{{ $player->id }}">
-                                            {{ $player->in_game_nickname }}</option>
+                                    <label for="roles">Roster</label>
+                                    <select name="roles[]" id="roles"
+                                        class="form-control rosters @error('roles') is-invalid @enderror" multiple>
+                                        @foreach($roles as $role)
+                                        <option value="{{ $role->id }}">
+                                            {{ $role->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('players')
+                                    @error('roles')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </span>

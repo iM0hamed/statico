@@ -90,7 +90,10 @@
                                         <div class="profile-widget-description text-center">
                                             <div class="profile-widget-name">{{ $player->in_game_nickname }} <div
                                                     class="text-muted d-inline font-weight-normal">
-                                                    <div class="slash"></div> Player Roles
+                                                    <div class="slash"></div>
+                                                    @foreach ($player->roles as $role)
+                                                    {{ $role->name }}{{ $loop->last ? '.' : ',' }}
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>

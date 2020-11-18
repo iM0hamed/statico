@@ -31,8 +31,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/teams/{slug}/rosters-change', [\App\Http\Controllers\TeamController::class, 'roster'])->name('teams.roster');
     Route::put('/teams/{slug}/rosters-change', [\App\Http\Controllers\TeamController::class, 'updateRoster'])->name('teams.roster.update');
 
-    Route::get('players', [\App\Http\Controllers\PlayerController::class, 'index'])->name('players');
-
+    Route::get('/players', [\App\Http\Controllers\PlayerController::class, 'index'])->name('players');
+    Route::get('/players/create', [\App\Http\Controllers\PlayerController::class, 'create'])->name('players.create');
+    Route::post('/players/store', [\App\Http\Controllers\PlayerController::class, 'store'])->name('players.store');
     
     Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 });
