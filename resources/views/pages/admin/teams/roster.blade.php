@@ -13,7 +13,7 @@
             <div class="container ml-0 mr-0">
                 <div class="row justify-content-between align-items-center">
                     <h2 class="section-title">
-                        Create new team
+                        Manage roster
                     </h2>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="col-md-10 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Team registration form</h4>
+                            <h4>Select available roster</h4>
                         </div>
                         <form action="{{ route('teams.roster.update', $team->slug) }}" method="post">
                             @csrf
@@ -29,9 +29,11 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="players">Roster</label>
-                                    <select name="players[]" id="players" class="form-control rosters" multiple>
+                                    <select name="players[]" id="players" class="form-control rosters" multiple
+                                        style="width: 100%">
                                         @foreach ($players as $key => $player)
-                                            <option value="{{ $player->id }}" @if($team->players->containsStrict('id', $player->id)) selected @endif>{{ $player->in_game_nickname }}</option>
+                                        <option value="{{ $player->id }}" @if($team->players->containsStrict('id',
+                                            $player->id)) selected @endif>{{ $player->in_game_nickname }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -53,10 +55,9 @@
 <script>
     $(document).ready(function() {
         $(".rosters").select2({
-            maximumSelectionLength: 6,
-            formatSelectionTooBig: function(limit) {
-                return 'Too many selected items';
-            }
+            // includeSelectAllOption: true,
+            // enableFiltering: true
+            theme: 'classic'
         });
     });
 </script>

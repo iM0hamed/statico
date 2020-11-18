@@ -14,6 +14,7 @@
 
     <!-- CSS Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url('assets/css/bootstrap-multiselect.css') }}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href={{ url('assets/css/style.css') }}>
@@ -37,6 +38,7 @@
 
     <!-- JS Libraies -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="{{ url('assets/js/bootstrap-multiselect.js') }}"></script>
 
     <!-- Template JS File -->
     <script src={{ url('assets/js/scripts.js') }}></script>

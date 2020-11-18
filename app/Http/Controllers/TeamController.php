@@ -2,36 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Player;
-use App\Models\Team;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use App\Http\Requests\TeamRosterUpdateRequest;
+use App\Http\Requests\TeamStoreRequest;
+use App\Http\Requests\TeamUpdateRequest;
+use App\Repositories\Interfaces\IPlayerRepository;
+use App\Repositories\Interfaces\ITeamRepository;
 
 class TeamController extends Controller
 {
-    public function __construct()
+    private $teamRepository;
+    private $playerRepository;
+
+    public function __construct(ITeamRepository $teamRepository, IPlayerRepository $playerRepository)
     {
         $this->middleware('auth:admin');
-    }
-
-    private function teamRules($state = 'store', $value = null)
-    {
-        $name = 'required|regex:/^[\pL\s\-]+$/u|string|unique:teams,name';
-
-        if ($state != 'store') {
-            $name = $name . ',' . $value;
-        }
-
-        return [
-            'name' => $name,
-            'description' => 'required|regex:/^[\pL\s\-]+$/u'
-        ];
+        $this->teamRepository = $teamRepository;
+        $this->playerRepository = $playerRepository;
     }
 
     public function index()
     {
         $title = 'Teams';
-        $teams = Team::paginate(6);
+        $teams = $this->teamRepository->getPaginated(6);
 
         return view('pages.admin.teams.index', compact('title', 'teams'));
     }
@@ -40,74 +32,53 @@ class TeamController extends Controller
     {
         $title = 'Create Team';
 
-        $players = Player::with('team')->whereDoesntHave('team')->get();
+        $players = $this->playerRepository->getFreeRosters();
 
         return view('pages.admin.teams.create', compact('title', 'players'));
     }
 
-    public function store(Request $request)
+    public function store(TeamStoreRequest $request)
     {
-        $request->validate($this->teamRules());
-
-        $request['slug'] = Str::slug($request->name);
-
-        $team = Team::create($request->all());
-
-        if ($request->players != null) {
-            $team->players()->attach($request->players);
-        }
+        $this->teamRepository->storeAndAttachPlayers($request->all());
 
         return redirect(route('teams'))->with('status', 'Team created successfully.');
     }
 
     public function setting($slug)
     {
-        $team = Team::where('slug', $slug)->first();
+        $team = $this->teamRepository->getBySlug($slug);
         $title = 'Team Setting';
 
         return view('pages.admin.teams.setting', compact('team', 'title'));
     }
 
-    public function updateSetting(Request $request, $slug)
+    public function updateSetting(TeamUpdateRequest $request, $slug)
     {
-        $team = Team::where('slug', $slug)->first();
-        $request->validate($this->teamRules('update', $team->id));
-
-        $team->update($request->all());
+        $this->teamRepository->updateBySlug($slug, $request->all());
 
         return redirect(route('teams.detail', $slug))->with('status', 'Team updated successfully.');
     }
 
     public function roster($slug)
     {
-        $title = 'Change Roster';
-        $team = Team::with('players')->where('slug', $slug)->first();
-        $teamId = $team->id;
+        $team = $this->teamRepository->getBySlug($slug);
+        $title = 'Manage Roster';
 
-        $players = Player::whereHas('team', function($query) use ($team) {
-            $query->where('team_id', $team->id);
-        })->orDoesntHave('team')->get();
+        $players = $this->playerRepository->getAvailableRosters($team);
 
         return view('pages.admin.teams.roster', compact('team', 'title', 'players'));
     }
 
-    public function updateRoster(Request $request, $slug)
+    public function updateRoster(TeamRosterUpdateRequest $request, $slug)
     {
-        $team = Team::with('players')->where('slug', $slug)->first();
-
-        $request->validate([
-            'players' => 'array'
-        ]);
-
-        $team->players()->sync($request->players);
-
+        $this->teamRepository->syncPlayers($slug, $request->players);
 
         return redirect(route('teams.detail', $slug))->with('status', 'Roster updated successfully.');
     }
 
     public function show($slug)
     {
-        $team = Team::with('players')->where('slug', $slug)->first();
+        $team = $this->teamRepository->getBySlug($slug);
         $title = $team->name;
 
         return view('pages.admin.teams.show', compact('team', 'title'));

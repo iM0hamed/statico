@@ -13,13 +13,13 @@
                         Overview
                     </h2>
                     <div class="text-center">
-                        <a href="{{ route('teams.setting', $team->slug) }}"
-                            class="btn btn-primary"><i class="fas fa-cogs fa-lg">
+                        <a href="{{ route('teams.setting', $team->slug) }}" class="btn btn-primary"><i
+                                class="fas fa-cogs fa-lg">
                             </i>
                             Team Setting
                         </a>
-                        <a href="{{ route('teams.setting', $team->slug) }}"
-                            class="btn btn-dark"><i class="fas fa-archive fa-lg">
+                        <a href="{{ route('teams.setting', $team->slug) }}" class="btn btn-dark"><i
+                                class="fas fa-archive fa-lg">
                             </i>
                             Archive Team
                         </a>
@@ -60,44 +60,43 @@
                         <div class="card-header bg-secondary">
                             <h4 class="lead">Rosters</h4>
                             <div class="ml-auto">
-                                <a href="{{ route('teams.roster', $team->slug) }}"
-                                    class="btn btn-primary"><i class="fas fa-random"></i> Change Roster</a>
+                                <a href="{{ route('teams.roster', $team->slug) }}" class="btn btn-primary"><i
+                                        class="fas fa-random"></i> Manage Roster</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row mb-4">
                                 @foreach($team->players as $player)
-                                    <div class="col-md-12 col-sm-12 col-lg-6">
-                                        <div class="card profile-widget shadow">
-                                            <div class="profile-widget-header">
-                                                <img alt="image"
-                                                    src="{{ url('assets') }}/img/avatar/avatar-1.png"
-                                                    class="rounded-circle profile-widget-picture">
-                                                <div class="profile-widget-items">
-                                                    <div class="profile-widget-item">
-                                                        <div class="profile-widget-item-label">Avg. Kills</div>
-                                                        <div class="profile-widget-item-value">5.49</div>
-                                                    </div>
-                                                    <div class="profile-widget-item">
-                                                        <div class="profile-widget-item-label">Highest Damage</div>
-                                                        <div class="profile-widget-item-value">1931</div>
-                                                    </div>
-                                                    <div class="profile-widget-item">
-                                                        <div class="profile-widget-item-label">Avg. Rating</div>
-                                                        <div class="profile-widget-item-value">7.4</div>
-                                                    </div>
+                                <div class="col-md-12 col-sm-12 col-lg-6">
+                                    <div class="card profile-widget shadow">
+                                        <div class="profile-widget-header">
+                                            <img alt="image" src="{{ url('assets') }}/img/avatar/avatar-1.png"
+                                                class="rounded-circle profile-widget-picture">
+                                            <div class="profile-widget-items">
+                                                <div class="profile-widget-item">
+                                                    <div class="profile-widget-item-label">Avg. Kills</div>
+                                                    <div class="profile-widget-item-value">5.49</div>
+                                                </div>
+                                                <div class="profile-widget-item">
+                                                    <div class="profile-widget-item-label">Highest Damage</div>
+                                                    <div class="profile-widget-item-value">1931</div>
+                                                </div>
+                                                <div class="profile-widget-item">
+                                                    <div class="profile-widget-item-label">Avg. Rating</div>
+                                                    <div class="profile-widget-item-value">7.4</div>
                                                 </div>
                                             </div>
-                                            <div class="profile-widget-description text-center">
-                                                <div class="profile-widget-name">{{ $player->in_game_nickname }} <div
-                                                        class="text-muted d-inline font-weight-normal">
-                                                        <div class="slash"></div> Player Roles
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
+                                        <div class="profile-widget-description text-center">
+                                            <div class="profile-widget-name">{{ $player->in_game_nickname }} <div
+                                                    class="text-muted d-inline font-weight-normal">
+                                                    <div class="slash"></div> Player Roles
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
+                                </div>
                                 @endforeach
                             </div>
                         </div>
