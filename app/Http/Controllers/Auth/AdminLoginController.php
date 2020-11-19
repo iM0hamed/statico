@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\AdminLoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -19,13 +19,8 @@ class AdminLoginController extends Controller
         return 'username';
     }
 
-    public function login(Request $request)
+    public function login(AdminLoginRequest $request)
     {
-        $request->validate([
-            $this->username() => 'required|string',
-            'password' => 'required|string',
-        ]);
-
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
             return redirect()->intended(route('admin.dashboard'));
         }
@@ -33,7 +28,7 @@ class AdminLoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-    public function sendFailedLoginResponse(Request $request)
+    public function sendFailedLoginResponse()
     {
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
