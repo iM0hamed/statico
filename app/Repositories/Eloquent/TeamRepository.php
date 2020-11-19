@@ -43,9 +43,6 @@ class TeamRepository extends BaseRepository implements ITeamRepository
     public function store(array $attributes)
     {
         $attributes['slug'] = Str::slug($attributes['name']);
-
-        $data = $this->store($attributes)->players()->attach($attributes['players']);
-
-        return $data;
+        return $this->model->create($attributes)->players()->attach($attributes['players']);
     }
 }
