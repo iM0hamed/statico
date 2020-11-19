@@ -39,7 +39,7 @@ class TeamController extends Controller
 
     public function store(TeamStoreRequest $request)
     {
-        $this->teamRepository->storeAndAttachPlayers($request->all());
+        $this->teamRepository->store($request->all());
 
         return redirect(route('teams'))->with('status', 'Team created successfully.');
     }
