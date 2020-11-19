@@ -8,5 +8,5 @@ interface ITeamRepository
     public function getBySlug($slug);
     public function updateBySlug($slug, array $attributes);
     public function syncPlayers($teamSlug, array $players);
-    public function storeAndAttachPlayers(array $attributesRequest);
+    public function store(array $attributes);
 }

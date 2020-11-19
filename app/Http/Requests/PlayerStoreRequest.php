@@ -24,8 +24,8 @@ class PlayerStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'in_game_id' => 'required|numeric',
-            'in_game_nickname' => 'required|alpha',
+            'in_game_id' => 'required|numeric|unique:players,in_game_id',
+            'in_game_nickname' => 'required|unique:players,in_game_nickname',
             'roles' => 'array|required'
         ];
     }

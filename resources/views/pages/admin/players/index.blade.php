@@ -41,17 +41,17 @@
             @else
             @foreach($players as $player)
             <div class="col-md-4 col-sm-12 mb-4">
-                <a href="{{ route('players', $player->slug) }}" class="card-link">
+                <a href="{!! route('players', $player->slug) !!}" class="card-link">
                     <div class="card shadow h-100">
                         <img src="{{ url('assets') }}/img/box-300x135-medium.jpg" class="card-img-top" alt="Team logo">
                         <div class="card-body text-center">
-                            <h5 class="lead">{{ $player->in_game_nickname }}</h5>
+                            <h5 class="lead">{!! $player->in_game_nickname !!}</h5>
                             <hr>
-                            <p class="text-dark">{{ $player->in_game_id }}</p>
-                            <p class="text-dark">{{ $player->team->first()->name ?? 'Free Agent' }}</p>
+                            <p class="text-dark">{!! $player->in_game_id !!}</p>
+                            <p class="text-dark">{!! $player->team->first()->name ?? 'Free Agent' !!}</p>
                             <p class="text-dark">
                                 @foreach ($player->roles as $role)
-                                {{ $role->name }}{{ $loop->last ? '.' : ',' }}
+                                {!! $role->name !!}{!! $loop->last ? '.' : ',' !!}
                                 @endforeach
                             </p>
                         </div>

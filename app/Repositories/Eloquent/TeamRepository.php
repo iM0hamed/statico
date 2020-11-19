@@ -40,11 +40,11 @@ class TeamRepository extends BaseRepository implements ITeamRepository
         $this->getBySlug($teamSlug)->players()->sync($players);
     }
 
-    public function storeAndAttachPlayers(array $attributesRequest)
+    public function store(array $attributes)
     {
-        $attributesRequest['slug'] = Str::slug($attributesRequest['name']);
+        $attributes['slug'] = Str::slug($attributes['name']);
 
-        $data = $this->store($attributesRequest)->players()->attach($attributesRequest['players']);
+        $data = $this->store($attributes)->players()->attach($attributes['players']);
 
         return $data;
     }
