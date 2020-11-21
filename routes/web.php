@@ -37,3 +37,9 @@ Route::prefix('admin')->group(function () {
     
     Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 });
+
+Route::group(['prefix' => 'api/v1'], function () {
+    Route::get('/teams', [\App\Http\Controllers\api\v1\TeamController::class, 'index'])->name('api.teams');
+    Route::post('/teams', [\App\Http\Controllers\api\v1\TeamController::class, 'store'])->name('api.teams.store');
+    Route::put('/teams/{slug}', [\App\Http\Controllers\api\v1\TeamController::class, 'setting'])->name('api.teams.setting');
+});
