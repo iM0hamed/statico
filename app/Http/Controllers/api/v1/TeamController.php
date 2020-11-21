@@ -30,16 +30,6 @@ class TeamController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,7 +37,7 @@ class TeamController extends Controller
      */
     public function store(TeamStoreRequest $request)
     {
-        //
+        return $this->teamRepository->store($request->all());
     }
 
     /**
@@ -56,9 +46,9 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        return $this->teamRepository->getBySlug($slug, ['players', 'image']);
     }
 
     /**

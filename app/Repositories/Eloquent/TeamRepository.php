@@ -24,9 +24,14 @@ class TeamRepository extends BaseRepository implements ITeamRepository
         return $this->model->paginate($limit);
     }
 
-    public function getBySlug($slug)
+    public function getBySlug($slug, $with = null)
     {
-        $data = $this->model->where('slug', $slug)->with('image')->first();
+        if (!isset($with)) {
+            $data = $this->model->where('slug', $slug)->first();
+        } else {
+            $data = $this->model->where('slug', $slug)->with($with)->first();
+        }
+        
         return $data;
     }
 
