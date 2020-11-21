@@ -3,7 +3,7 @@
 Installation
 -----------
 
-  1. Run in cmd or bash `git clone https://https://github.com/borneo-digital-creative/statico.git`
+  1. Run in cmd or bash `git clone https://github.com/borneo-digital-creative/statico.git`
   2. Move into the folder `cd statico`
   3. Install dependencies `composer install`
   4. Create new database named "statico".
