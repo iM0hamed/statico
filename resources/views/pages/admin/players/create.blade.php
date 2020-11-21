@@ -49,9 +49,9 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="roles">Roster</label>
+                                    <label for="roles">Roles</label>
                                     <select name="roles[]" id="roles"
-                                        class="form-control rosters @error('roles') is-invalid @enderror" multiple>
+                                        class="form-control roles @error('roles') is-invalid @enderror" multiple>
                                         @foreach($roles as $role)
                                         <option value="{{ $role->id }}">
                                             {{ $role->name }}</option>
@@ -80,8 +80,9 @@
 @section('javascript')
 <script>
     $(document).ready(function () {
-        $(".rosters").select2({
-            theme: 'classic'
+        $(".roles").select2({
+            theme: 'classic',
+            maximumSelectionLength: 2
         });
     });
 

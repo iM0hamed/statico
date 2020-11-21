@@ -34,6 +34,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/players', [\App\Http\Controllers\PlayerController::class, 'index'])->name('players');
     Route::get('/players/create', [\App\Http\Controllers\PlayerController::class, 'create'])->name('players.create');
     Route::post('/players/store', [\App\Http\Controllers\PlayerController::class, 'store'])->name('players.store');
+    Route::get('/players/{slug}', [\App\Http\Controllers\PlayerController::class, 'show'])->name('players.detail');
     
     Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 });

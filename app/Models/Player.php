@@ -33,6 +33,14 @@ class Player extends Authenticatable
         'password',
     ];
 
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     * 
+     * protected $with = ['team'];
+     */
+
     public function team()
     {
         return $this->belongsToMany(Team::class, 'rosters');

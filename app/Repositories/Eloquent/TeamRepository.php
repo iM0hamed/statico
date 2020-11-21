@@ -7,6 +7,7 @@ use App\Models\TeamImage;
 use App\Repositories\Interfaces\ITeamRepository;
 
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class TeamRepository extends BaseRepository implements ITeamRepository
 {
@@ -70,6 +71,8 @@ class TeamRepository extends BaseRepository implements ITeamRepository
     public function uploadLogo($team, $image)
     {
         $path = $image->store('logo', 'public');
+
+        $this->resize($path);
         
         $createdImage = $this->imageInstance->create([ 'team_id' => $team->id, 'image' => $path ]);
 
@@ -80,6 +83,17 @@ class TeamRepository extends BaseRepository implements ITeamRepository
     {
         $path = $image->store('logo', 'public');
 
+        $this->resize($path);
+
         $team->image->update([ 'image' => $path ]);
+    }
+
+    private function resize($image)
+    {
+        $resizedImage = Image::make('storage/' . $image)->resize(300, null, function($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $resizedImage->save();
     }
 }

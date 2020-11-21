@@ -21,6 +21,8 @@
     <link rel="stylesheet" href={{ url('assets/css/components.css') }}>
 </head>
 
+@yield('customCss')
+
 <body>
     @yield('body')
     <!-- General JS Scripts -->
