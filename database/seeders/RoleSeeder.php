@@ -17,11 +17,11 @@ class RoleSeeder extends Seeder
     {
         DB::table('roles')->delete();
         $rolesList = [
-            ['name' => 'Leader'],
-            ['name' => 'Support'],
+            ['name' => 'IGL'],
+            ['name' => 'Scout'],
             ['name' => 'Rusher'],
-            ['name' => 'Scouter'],
-            ['name' => 'Flexible'],
+            ['name' => 'Sniper'],
+            ['name' => 'Substitute'],
         ];
 
         foreach ($rolesList as $value) {

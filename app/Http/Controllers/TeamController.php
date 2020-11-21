@@ -78,7 +78,7 @@ class TeamController extends Controller
 
     public function show($slug)
     {
-        $team = $this->teamRepository->getBySlug($slug);
+        $team = $this->teamRepository->getBySlug($slug, ['players.image']);
         $title = $team->name;
 
         return view('pages.admin.teams.show', compact('team', 'title'));

@@ -71,7 +71,8 @@
                                 <div class="col-md-12 col-sm-12 col-lg-6">
                                     <div class="card profile-widget shadow">
                                         <div class="profile-widget-header">
-                                            <img alt="image" src="{{ url('assets') }}/img/avatar/avatar-1.png"
+                                            {{-- {{ dd($team) }} --}}
+                                            <img alt="image" src="{{ $player->image == null ? url('assets/' . 'img/avatar/avatar-1.png') : asset('storage/' . $player->image->image) }}"
                                                 class="rounded-circle profile-widget-picture">
                                             <div class="profile-widget-items">
                                                 <div class="profile-widget-item">
