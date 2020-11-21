@@ -24,8 +24,9 @@ class TeamUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|regex:/^[\pL\s\-]+$/u|string|unique:teams,name' . $this->team,
-            'description' => 'required|regex:/^[\pL\s\-]+$/u'
+            'name' => 'required|regex:/^[\pL\s\-]+$/u|string|unique:teams,name,' . $this->id,
+            'description' => 'required|regex:/^[\pL\s\-]+$/u',
+            'logo' => 'file|image|max:5000'
         ];
     }
 }

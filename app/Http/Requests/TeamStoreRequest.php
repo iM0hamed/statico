@@ -26,7 +26,8 @@ class TeamStoreRequest extends FormRequest
         return [
             'name' => 'required|regex:/^[\pL\s\-]+$/u|string|unique:teams,name',
             'description' => 'required|regex:/^[\pL\s\-]+$/u',
-            'players' => 'required|array'
+            'players' => 'required|array',
+            'logo' => 'file|image|max:5000'
         ];
     }
 }

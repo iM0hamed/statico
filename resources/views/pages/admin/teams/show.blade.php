@@ -30,7 +30,8 @@
                 <div class="col-12 col-md-12 col-lg-12">
                     <div class="card profile-widget shadow">
                         <div class="profile-widget-header">
-                            <img alt="image" src="{{ url('assets') }}/img/bigetron.png"
+                            <img alt="image"
+                                src="{{ $team->image == null ? url('assets/' . 'img/bigetron.png') : asset('storage/' . $team->image->image) }}"
                                 class="rounded-circle profile-widget-picture">
                             <div class="profile-widget-items">
                                 <div class="profile-widget-item">

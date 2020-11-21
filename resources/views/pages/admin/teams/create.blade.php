@@ -23,7 +23,8 @@
                         <div class="card-header">
                             <h4>Team registration form</h4>
                         </div>
-                        <form action="{{ route('teams.store') }}" method="post">
+                        <form action="{{ route('teams.store') }}" method="post" enctype="multipart/form-data"
+                            accept="image/*">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -62,6 +63,17 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="logo">Team Logo</label>
+                                    <div class="input-group mb-3">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="logo" name="logo">
+                                            <label class="custom-file-label" for="logo" aria-describedby="logo">
+                                                Choose your logo
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer text-right pt-0">

@@ -9,4 +9,6 @@ interface ITeamRepository
     public function updateBySlug($slug, array $attributes);
     public function syncPlayers($teamSlug, array $players);
     public function store(array $attributes);
+    public function uploadLogo($team, $image);
+    public function updateLogo($team, $image);
 }

@@ -23,10 +23,11 @@
                         <div class="card-header">
                             <h4>Team setting</h4>
                         </div>
-                        <form action="{{ route('teams.setting.update', $team->slug) }}"
-                            method="post">
+                        <form action="{{ route('teams.setting.update', $team->slug) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="id" value="{{ $team->id }}">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Team name</label>
@@ -34,9 +35,9 @@
                                         class="form-control @error('name') is-invalid @enderror"
                                         value="{{ old('name') ?? $team->name }}">
                                     @error('name')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
@@ -45,15 +46,25 @@
                                         class="form-control @error('description') is-invalid @enderror"
                                         value="{{ old('description') ?? $team->description }}">
                                     @error('description')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="logo">Team Logo</label>
+                                    <div class="input-group mb-3">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="logo" name="logo">
+                                            <label class="custom-file-label" for="logo" aria-describedby="logo">
+                                                Choose your logo
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer text-right pt-0">
-                                <a href="{{ route('teams.detail', $team->slug) }}"
-                                    class="btn btn-secondary">Cancel</a>
+                                <a href="{{ route('teams.detail', $team->slug) }}" class="btn btn-secondary">Cancel</a>
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </form>
