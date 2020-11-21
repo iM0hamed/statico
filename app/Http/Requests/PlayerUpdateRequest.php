@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PlayerStoreRequest extends FormRequest
+class PlayerUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class PlayerStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'in_game_id' => 'required|numeric|unique:players,in_game_id',
-            'in_game_nickname' => 'required|unique:players,in_game_nickname',
+            'in_game_nickname' => 'required|unique:players,in_game_nickname,' . $this->id,
             'roles' => 'array|required',
             'photo' => 'file|image|max:2000'
         ];

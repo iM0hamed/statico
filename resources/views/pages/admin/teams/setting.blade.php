@@ -84,7 +84,7 @@
         let input = document.getElementById('logo');
         let label = document.getElementById('logoLabel');
 
-        if (logo.files.length > 0) {
+        if (input.files.length > 0) {
             label.innerHTML = input.files[0].name;
         }
     }

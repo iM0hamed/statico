@@ -35,6 +35,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/players/create', [\App\Http\Controllers\PlayerController::class, 'create'])->name('players.create');
     Route::post('/players/store', [\App\Http\Controllers\PlayerController::class, 'store'])->name('players.store');
     Route::get('/players/{slug}', [\App\Http\Controllers\PlayerController::class, 'show'])->name('players.detail');
+    Route::get('/players/{slug}/setting', [\App\Http\Controllers\PlayerController::class, 'setting'])->name('players.setting');
+    Route::put('/players/{slug}/setting', [\App\Http\Controllers\PlayerController::class, 'update'])->name('players.setting.update');
     
     Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 });

@@ -8,4 +8,6 @@ interface IPlayerRepository
     public function getAvailableRosters($team);
     public function getFreeRosters();
     public function store(array $attributes);
+    public function getBySlug(string $slug, array $with = null);
+    public function updateBySlug($slug, array $attributes);
 }

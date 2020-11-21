@@ -13,7 +13,7 @@
             <div class="container ml-0 mr-0">
                 <div class="row justify-content-between align-items-center">
                     <h2 class="section-title">
-                        Register new player
+                        Profile setting
                     </h2>
                 </div>
             </div>
@@ -21,27 +21,18 @@
                 <div class="col-md-10 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Player registration form</h4>
+                            <h4>Setting form</h4>
                         </div>
-                        <form action="{{ route('players.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('players.setting.update', $player->slug) }}" method="post" enctype="multipart/form-data">
+                            @method('PUT')
                             @csrf
+                            <input type="hidden" name="id" value="{{ $player->id }}">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="in_game_id">in-Game ID</label>
-                                    <input type="text" name="in_game_id" id="in_game_id"
-                                        class="form-control @error('in_game_id') is-invalid @enderror"
-                                        value="{{ old('in_game_id') }}">
-                                    @error('in_game_id')
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
                                 <div class="form-group">
                                     <label for="in_game_nickname">in-Game Nickname</label>
                                     <input name="in_game_nickname" id="in_game_nickname"
                                         class="form-control @error('in_game_nickname') is-invalid @enderror"
-                                        value="{{ old('in_game_nickname') }}">
+                                        value="{{ old('in_game_nickname') ?? $player->in_game_nickname }}">
                                     @error('in_game_nickname')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -65,8 +56,9 @@
                                     <label for="roles">Roles</label>
                                     <select name="roles[]" id="roles"
                                         class="form-control roles @error('roles') is-invalid @enderror" multiple>
-                                        @foreach($roles as $role)
-                                        <option value="{{ $role->id }}">
+                                        @foreach($player->roles as $role)
+                                        <option value="{{ $role->id }}" @if($player->roles->containsStrict('id',
+                                            $role->id)) selected @endif>
                                             {{ $role->name }}</option>
                                         @endforeach
                                     </select>

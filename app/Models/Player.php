@@ -50,4 +50,9 @@ class Player extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'players_roles');
     }
+
+    public function image()
+    {
+        return $this->hasOne(PlayerImage::class);
+    }
 }

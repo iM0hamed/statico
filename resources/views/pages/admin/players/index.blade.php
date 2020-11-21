@@ -46,7 +46,7 @@
                     <div class="card profile-card-1 shadow">
                         <img src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb"
                             alt="profile-sample1" class="background" />
-                        <img src="{{ asset('assets/img/avatar/avatar-1.png') }}" alt="profile-image" class="profile" />
+                        <img src="{{ $player->image == null ? url('assets/' . 'img/avatar/avatar-1.png') : asset('storage/' . $player->image->image) }}" alt="profile-image" class="profile" />
                         <div class="card-content">
                             <h2 class="text-light">{!! $player->in_game_nickname !!}
                                 @foreach ($player->roles as $role)

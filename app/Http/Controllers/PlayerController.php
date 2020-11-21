@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PlayerStoreRequest;
+use App\Http\Requests\PlayerUpdateRequest;
 use App\Repositories\Interfaces\IPlayerRepository;
 use App\Repositories\Interfaces\IRoleRepository;
 
@@ -39,5 +40,28 @@ class PlayerController extends Controller
         $this->playerRepository->store($request->all());
 
         return redirect(route('players'))->with('status', 'New player has been registered');
+    }
+
+    public function update($slug, PlayerUpdateRequest $request)
+    {
+        $this->playerRepository->updateBySlug($slug, $request->all());
+
+        return redirect(route('players.detail', $slug))->with('status', 'Profile updated successfully.');
+    }
+
+    public function show($slug)
+    {
+        $title = 'Player Overview';
+        $player = $this->playerRepository->getBySlug($slug, ['roles', 'image']);
+
+        return view('pages.admin.players.show', compact('player', 'title'));
+    }
+
+    public function setting($slug)
+    {
+        $title = 'Player Profile Setting';
+        $player = $this->playerRepository->getBySlug($slug, ['roles']);
+
+        return view('pages.admin.players.setting', compact('title', 'player'));
     }
 }

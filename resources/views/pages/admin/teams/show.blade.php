@@ -111,9 +111,3 @@
     </section>
 </div>
 @endsection
-
-<!-- <ul class="list-group list-group-flush">
-@foreach($team->players as $player)
-<li class="list-group-item">{{ $player->in_game_nickname }}</li>
-@endforeach
-</ul> -->
