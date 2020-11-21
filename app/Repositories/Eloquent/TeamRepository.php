@@ -66,10 +66,7 @@ class TeamRepository extends BaseRepository implements ITeamRepository
     {
         $path = $image->store('logo', 'public');
         
-        $createdImage = $this->imageInstance->create([
-            'team_id' => $team->id,
-            'image' => $path
-        ]);
+        $createdImage = $this->imageInstance->create([ 'team_id' => $team->id, 'image' => $path ]);
 
         $team->image()->save($createdImage);
     }

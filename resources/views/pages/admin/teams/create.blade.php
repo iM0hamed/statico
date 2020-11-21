@@ -68,8 +68,10 @@
                                     <label for="logo">Team Logo</label>
                                     <div class="input-group mb-3">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="logo" name="logo">
-                                            <label class="custom-file-label" for="logo" aria-describedby="logo">
+                                            <input type="file" class="custom-file-input" id="logo" name="logo"
+                                                onchange="changeLabel()">
+                                            <label class="custom-file-label" for="logo" aria-describedby="logo"
+                                                id="logoLabel">
                                                 Choose your logo
                                             </label>
                                         </div>
@@ -97,5 +99,13 @@
         });
     });
 
+    function changeLabel() {
+        let input = document.getElementById('logo');
+        let label = document.getElementById('logoLabel');
+
+        if (logo.files.length > 0) {
+            label.innerHTML = input.files[0].name;
+        }
+    }
 </script>
 @endsection
