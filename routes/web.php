@@ -26,6 +26,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/teams', [\App\Http\Controllers\TeamController::class, 'store'])->name('teams.store');
     Route::get('/teams/create', [\App\Http\Controllers\TeamController::class, 'create'])->name('teams.create');
     Route::get('/teams/{slug}', [\App\Http\Controllers\TeamController::class, 'show'])->name('teams.detail');
+    Route::delete('/teams/{slug}', [\App\Http\Controllers\TeamController::class, 'destroy'])->name('teams.delete');
     Route::get('/teams/{slug}/setting', [\App\Http\Controllers\TeamController::class, 'setting'])->name('teams.setting');
     Route::put('/teams/{slug}/setting', [\App\Http\Controllers\TeamController::class, 'updateSetting'])->name('teams.setting.update');
     Route::get('/teams/{slug}/rosters-change', [\App\Http\Controllers\TeamController::class, 'roster'])->name('teams.roster');

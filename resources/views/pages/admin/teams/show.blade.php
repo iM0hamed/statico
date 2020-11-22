@@ -13,16 +13,17 @@
                         Overview
                     </h2>
                     <div class="text-center">
-                        <a href="{{ route('teams.setting', $team->slug) }}" class="btn btn-primary"><i
-                                class="fas fa-cogs fa-lg">
-                            </i>
-                            Team Setting
+                        <a href="{{ route('teams.setting', $team->slug) }}" class="btn btn-primary">
+                            <i class="fas fa-cogs fa-lg"></i> Team Setting
                         </a>
-                        <a href="{{ route('teams.setting', $team->slug) }}" class="btn btn-dark"><i
-                                class="fas fa-archive fa-lg">
-                            </i>
-                            Archive Team
+                        <a href="{{ route('teams.delete', $team->slug) }}" class="btn btn-dark" onclick="event.preventDefault();
+                            document.getElementById('delete-form').submit();"">
+                            <i class="fas fa-archive fa-lg"></i> Archive Team
                         </a>
+                        <form id="delete-form" action="{{ route('teams.delete', $team->slug) }}" method="POST" class="d-none">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </div>
                 </div>
             </div>
@@ -61,8 +62,9 @@
                         <div class="card-header bg-secondary">
                             <h4 class="lead">Rosters</h4>
                             <div class="ml-auto">
-                                <a href="{{ route('teams.roster', $team->slug) }}" class="btn btn-primary"><i
-                                        class="fas fa-random"></i> Manage Roster</a>
+                                <a href="{{ route('teams.roster', $team->slug) }}" class="btn btn-primary">
+                                    <i class="fas fa-random"></i> Manage Roster
+                                </a>
                             </div>
                         </div>
                         <div class="card-body">
