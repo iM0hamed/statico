@@ -21,6 +21,7 @@ class RoleSeeder extends Seeder
             ['name' => 'Scout'],
             ['name' => 'Rusher'],
             ['name' => 'Sniper'],
+            ['name' => 'Support'],
             ['name' => 'Substitute'],
         ];
 

@@ -31,6 +31,7 @@ class Player extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'pivot'
     ];
 
     /**

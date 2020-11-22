@@ -43,7 +43,7 @@ return [
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'players',
+            'provider' => 'admins',
             'hash' => false,
         ],
 

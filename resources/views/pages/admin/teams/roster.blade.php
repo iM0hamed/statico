@@ -29,13 +29,18 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="players">Roster</label>
-                                    <select name="players[]" id="players" class="form-control rosters" multiple
+                                    <select name="players[]" id="players" class="form-control rosters @error('players') is-invalid @enderror" multiple
                                         style="width: 100%">
                                         @foreach ($players as $key => $player)
                                         <option value="{{ $player->id }}" @if($team->players->containsStrict('id',
                                             $player->id)) selected @endif>{{ $player->in_game_nickname }}</option>
                                         @endforeach
                                     </select>
+                                    @error('players')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="card-footer text-right pt-0">

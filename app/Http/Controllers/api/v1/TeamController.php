@@ -5,18 +5,15 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeamStoreRequest;
 use App\Http\Requests\TeamUpdateRequest;
-use App\Repositories\Interfaces\IPlayerRepository;
 use App\Repositories\Interfaces\ITeamRepository;
 
 class TeamController extends Controller
 {
     private $teamRepository;
-    private $playerRepository;
 
-    public function __construct(ITeamRepository $teamRepository, IPlayerRepository $playerRepository) 
+    public function __construct(ITeamRepository $teamRepository) 
     {
         $this->teamRepository = $teamRepository;
-        $this->playerRepository = $playerRepository;
     }
 
     /**
@@ -26,7 +23,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return $this->teamRepository->getPaginated(6);
+        return $this->teamRepository->getPaginated(6, ['players.image']);
     }
 
     /**
@@ -48,7 +45,7 @@ class TeamController extends Controller
      */
     public function show($slug)
     {
-        return $this->teamRepository->getBySlug($slug, ['players', 'image']);
+        return $this->teamRepository->getBySlug($slug, ['players.image', 'image']);
     }
 
     /**

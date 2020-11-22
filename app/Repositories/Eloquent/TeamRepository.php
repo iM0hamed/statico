@@ -20,9 +20,15 @@ class TeamRepository extends BaseRepository implements ITeamRepository
         $this->imageInstance = $imageInstance;
     }
 
-    public function getPaginated($limit)
+    public function getPaginated($limit, array $with = null)
     {
-        return $this->model->paginate($limit);
+        $teams = $this->model;
+
+        if (isset($with)) {
+            $teams = $teams->with($with);
+        }
+
+        return $teams->paginate($limit);
     }
 
     public function getBySlug($slug, $with = null)
