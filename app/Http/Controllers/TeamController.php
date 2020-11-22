@@ -83,4 +83,11 @@ class TeamController extends Controller
 
         return view('pages.admin.teams.show', compact('team', 'title'));
     }
+
+    public function destroy($slug)
+    {
+        $this->teamRepository->destroy($slug);
+
+        return redirect(route('teams'));
+    }
 }

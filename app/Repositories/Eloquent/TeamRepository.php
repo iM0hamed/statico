@@ -74,6 +74,11 @@ class TeamRepository extends BaseRepository implements ITeamRepository
         return $team;
     }
 
+    public function destroy($slug)
+    {
+        $this->getBySlug($slug)->delete();
+    }
+
     private function uploadLogo($team, $image)
     {
         $path = $image->store('logo', 'public');
