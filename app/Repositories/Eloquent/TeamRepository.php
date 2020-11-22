@@ -74,7 +74,7 @@ class TeamRepository extends BaseRepository implements ITeamRepository
         return $team;
     }
 
-    public function uploadLogo($team, $image)
+    private function uploadLogo($team, $image)
     {
         $path = $image->store('logo', 'public');
 
@@ -85,7 +85,7 @@ class TeamRepository extends BaseRepository implements ITeamRepository
         $team->image()->save($createdImage);
     }
 
-    public function updateLogo($team, $image)
+    private function updateLogo($team, $image)
     {
         $path = $image->store('logo', 'public');
 
