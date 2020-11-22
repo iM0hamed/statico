@@ -48,11 +48,6 @@ class TeamController extends Controller
         return $this->teamRepository->getBySlug($slug, ['players.image', 'image']);
     }
 
-    public function edit($slug)
-    {
-        
-    }
-
     /**
      * Update the specified resource in storage.
      *
