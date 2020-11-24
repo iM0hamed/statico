@@ -8,18 +8,14 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url('assets/css/bootstrap-multiselect.css') }}">
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href={{ url('assets/css/style.css') }}>
-    <link rel="stylesheet" href={{ url('assets/css/components.css') }}>
+    <link rel="stylesheet" href={{ asset('css/app.css') }}>
 </head>
 
 @yield('customCss')
@@ -37,15 +33,10 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src={{ url('assets/js/stisla.js') }}></script>
+    <script src={{ asset('js/app.js') }}></script>
 
     <!-- JS Libraies -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script src="{{ url('assets/js/bootstrap-multiselect.js') }}"></script>
-
-    <!-- Template JS File -->
-    <script src={{ url('assets/js/scripts.js') }}></script>
-    <script src={{ url('assets/js/custom.js') }}></script>
 
     @yield('javascript')
 
