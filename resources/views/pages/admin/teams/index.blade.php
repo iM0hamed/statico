@@ -32,17 +32,18 @@
                 </div>
             </div>
             <div class="row">
-                @if($teams->count() <= 0) <div class="col-md-12">
-                    <div class="text-center">
-                        <p class="lead">There is no data available.</p>
-                    </div>
+            @if($teams->count() <= 0) 
+            <div class="col-md-12">
+                <div class="text-center">
+                    <p class="lead">There is no data available.</p>
+                </div>
             </div>
             @else
             @foreach($teams as $team)
             <div class="col-md-4 col-sm-12 mb-4">
                 <a href="{{ route('teams') . '/' . $team->slug }}" class="card-link">
                     <div class="card shadow h-100">
-                        <img src="{{ url('assets') }}/img/box-300x135-medium.jpg" class="card-img-top" alt="Team logo">
+                        <img src="{{ asset('img/box-300x135-medium.jpg') }}" class="card-img-top" alt="Team logo">
                         <div class="card-body text-center">
                             <h5 class="lead">{{ $team->name }}</h5>
                             <hr>
